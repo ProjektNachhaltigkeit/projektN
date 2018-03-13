@@ -214,6 +214,16 @@ Prefab:
       propertyPath: m_Name
       value: Carot
       objectReference: {fileID: 0}
+    - target: {fileID: 224268167487496432, guid: 3bbf2882d141985499acbef5f4487b1c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 224268167487496432, guid: 3bbf2882d141985499acbef5f4487b1c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 22
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3bbf2882d141985499acbef5f4487b1c, type: 2}
   m_IsPrefabParent: 0
@@ -300,7 +310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &289384788
 RectTransform:
   m_ObjectHideFlags: 0
@@ -617,12 +627,12 @@ Prefab:
     - target: {fileID: 224268167487496432, guid: 3bbf2882d141985499acbef5f4487b1c,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 224268167487496432, guid: 3bbf2882d141985499acbef5f4487b1c,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 38
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 114791354146145916, guid: 3bbf2882d141985499acbef5f4487b1c,
         type: 2}
