@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 			//PC
 		if (Input.GetMouseButtonDown (0)) {			
 			//Handle finger movements based on touch phase
-			//if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject ()) {
+			if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject ()) {
 
 				//PC
 				MoveToTouch ();		
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
 				}*/
 
 			}
-		//}
+		}
 	}
 	void MoveToTouch(){
 
