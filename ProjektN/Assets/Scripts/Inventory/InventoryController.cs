@@ -22,6 +22,29 @@ public class InventoryController : MonoBehaviour {
 
 		uIManager = GameObject.Find ("UI").GetComponent<UIManager> ();
 		canvas = GameObject.Find ("UI").GetComponent<Transform> ();
+
+		GameObject panel_Closed = transform.Find("Iventory_Panel_Closed").gameObject;
+		GameObject panel_Open = transform.Find("Iventory_Panel_Open").gameObject;
+		Button button_CloseInventory = transform.Find ("Iventory_Panel_Open/Button_CloseInventory").GetComponent<Button> ();
+		Button button_OpenInventory = transform.Find ("Iventory_Panel_Closed/Button_OpenInventory").GetComponent<Button> ();
+
+
+
+		//Close Iventory Button
+		button_CloseInventory.GetComponent<Button>().onClick.AddListener(()=> {
+			//gameObject.SetActive(false);
+			panel_Open.SetActive(false);
+			panel_Closed.SetActive(true);
+
+		});
+
+		//Open Inventory Button
+		button_OpenInventory.GetComponent<Button>().onClick.AddListener(()=> {
+			panel_Closed.SetActive(false);
+			panel_Open.SetActive(true);
+		});
+
+		transform.Find("Iventory_Panel_Open").gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -37,12 +60,19 @@ public class InventoryController : MonoBehaviour {
 			graphicRaycaster.Raycast (pointerEventData, raycastResults);
 			if (raycastResults.Count > 0) {
 					//print (result.gameObject.name);
-					if (raycastResults [0].gameObject.GetComponent<Item> ()) {
-						draggedItem = raycastResults [0].gameObject;
-						parentOfDraggedItem = draggedItem.transform.parent;
-						draggedItem.transform.SetParent (canvas);
-					}
+				if (raycastResults [0].gameObject.GetComponent<Item> ()) {
+					draggedItem = raycastResults [0].gameObject;
+					parentOfDraggedItem = draggedItem.transform.parent;
+					draggedItem.transform.SetParent (canvas);
+				} else {
+					raycastResults.Clear ();
+				}
 			}
+		}
+
+		if(draggedItem == null) {
+			Debug.Log ("NULL");
+			return;
 		}
 
 		//Item follows mouse
