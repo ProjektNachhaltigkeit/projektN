@@ -69,18 +69,29 @@ public class InventoryController : MonoBehaviour {
 						//Set New Parent
 						draggedItem.transform.SetParent (result.gameObject.transform);
 						break; //finish foreach loop
-					} else if(result.gameObject.CompareTag("ItemIcon")){
-						//Swap item
+					} 
+					if (result.gameObject.CompareTag ("ItemIcon")) {
 						//Result ist the item we are dropping our item on
-						draggedItem.transform.SetParent(result.gameObject.transform.parent);
-						result.gameObject.transform.SetParent(parentOfDraggedItem);
-						result.gameObject.transform.localPosition = Vector3.zero;
-						break;
+						if (result.gameObject.name != draggedItem.name) {
+							//Swap item
+							draggedItem.transform.SetParent (result.gameObject.transform.parent);
+							result.gameObject.transform.SetParent (parentOfDraggedItem);
+							result.gameObject.transform.localPosition = Vector3.zero;
+							break;
+						} else {
+							//Stack items if they are the same
+							result.gameObject.GetComponent<Item> ().quantity += draggedItem.GetComponent<Item> ().quantity;
+							result.gameObject.transform.Find ("QuantityText").GetComponent<Text> ().text = result.gameObject.GetComponent<Item> ().quantity.ToString();
+							GameObject.Destroy (draggedItem);	
+
+						}
 					}
 				}
 			}
 			//Reset position to zero
-			draggedItem.transform.localPosition = Vector3.zero;
+			if (gameObject != null) { //Wenn es nicht wegen dem Stacken schon zerstört wurde
+				draggedItem.transform.localPosition = Vector3.zero;
+			}
 			draggedItem = null;
 		}
 		raycastResults.Clear ();
