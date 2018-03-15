@@ -16,6 +16,7 @@ public abstract class Vegetable : MonoBehaviour {
 	public float timeToGrow; //Zeit, die die Pflanze benötigt, vom Gießen bis zum Ausgewachsen-Sein
 	public string typeOfVegetable;
 
+
 	//Verschiedene Zustände des Gemüses:
 	public enum HarvestStates{
 		None,
@@ -72,6 +73,8 @@ public abstract class Vegetable : MonoBehaviour {
 		currentState = HarvestStates.None; 
 
 		vegetableBed = transform.parent.GetComponent<VegetableBed> ();
+
+
 		//vegetableBed = transform.parent.GetComponent <VegetableBed> ();
 		//vegetableBed.amountHarvested++;
 		//Debug.Log ("AmountHarvested: " + vegetableBed.amountHarvested);

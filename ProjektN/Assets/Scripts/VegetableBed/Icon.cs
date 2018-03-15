@@ -12,7 +12,9 @@ public class Icon : MonoBehaviour {
 
 	void Update () {
 		//Icon wird auf die selbe Posoiton wie das getriggerte Objekt gesetzt
-		Vector3 offset = new Vector3(target.position.x, target.position.y+1f, target.position.z);
+		Vector3 offset = new Vector3(target.position.x, target.position.y+1, target.position.z);
+		//Vector3 offset = new Vector3(target.position.x, target.position.y, target.position.z);
+
 		Vector3 targetPosition = Camera.main.WorldToScreenPoint (offset);
 		//Vector3 targetPosition = Camera.main.WorldToScreenPoint (target.position);
 		transform.position = targetPosition;

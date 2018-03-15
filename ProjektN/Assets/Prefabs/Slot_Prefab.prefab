@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114249706391119978}
   - component: {fileID: 114171360788242914}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Carrot
   m_TagString: ItemIcon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,10 +198,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 5
-  m_MinHeight: 20
-  m_PreferredWidth: 15
-  m_PreferredHeight: 30
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
