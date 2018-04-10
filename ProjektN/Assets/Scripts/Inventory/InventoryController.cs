@@ -71,7 +71,7 @@ public class InventoryController : MonoBehaviour {
 		}
 
 		if(draggedItem == null) {
-			Debug.Log ("NULL");
+			//Debug.Log ("NULL");
 			return;
 		}
 

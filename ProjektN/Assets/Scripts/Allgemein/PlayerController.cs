@@ -18,25 +18,25 @@ public class PlayerController : MonoBehaviour {
 	void Update(){
 
 		//TOUCH:
-		if (Input.touchCount > 0) {
+		//if (Input.touchCount > 0) {
 		//TOUCH:
-			Touch touch = Input.GetTouch(0);
+		//	Touch touch = Input.GetTouch(0);
 			
 		//PC
-		//if (Input.GetMouseButtonDown (0)) {			
+		if (Input.GetMouseButtonDown (0)) {			
 			//Handle finger movements based on touch phase
 
 			//PC
-			//if (!EventSystem.current.IsPointerOverGameObject()){
+			if (!EventSystem.current.IsPointerOverGameObject()){
 
 			//TOUCH
-			if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)){
+			//if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)){
 
 				//PC
-			//MoveToTouch ();		
+			MoveToTouch ();		
 
 				//TOUCH
-				switch (touch.phase) {
+			/*	switch (touch.phase) {
 				case TouchPhase.Began:
 						MoveToTouch (); //Movement beim Tippen
 						break;
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 							EndWalking ();
 						}
 						break;
-				}
+				}*/
 
 			}
 		}
@@ -63,10 +63,10 @@ public class PlayerController : MonoBehaviour {
 	void MoveToTouch(){
 
 		//TOUCH
-		Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch(0).position); //Ray erstellen
+		//Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch(0).position); //Ray erstellen
 
 		//PC
-		//Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); //Ray erstellen
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); //Ray erstellen
 
 		RaycastHit hit;
 
@@ -79,10 +79,10 @@ public class PlayerController : MonoBehaviour {
 				//wenn der Finger auf dem Character ist oder über den Character fährt
 
 				//TOUCH
-				float step = 4f * Time.deltaTime;
+				//float step = 4f * Time.deltaTime;
 
 				//PC
-				//float step = 30f * Time.deltaTime;
+				float step = 30f * Time.deltaTime;
 					
 					transform.position = Vector3.MoveTowards (transform.position, hit.point, step);
 					hit.point = new Vector3 (hit.point.x, this.transform.position.y, hit.point.z);

@@ -3,8 +3,122 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Patch : Interactable {
+public class GroundPlantButtonManager : MonoBehaviour {
 
+	private Button plantButton;
+	private Button waterButton;
+	private Button fertiliseButton;
+	private Button harvestButton;
+	private List<Button> seeds;
+
+	public HarvestablePlant harvestablePlant;
+
+	public HarvestablePlant.HarvestStates currentState; //Wachs-Zustand, in dem sich die Pflanze gerade befindet
+	public HarvestablePlant.HarvestStates oldState; //Vorheriger Wachs-Zustand
+
+	public GameObject plant;
+
+
+
+	public void Start(){
+		Debug.Log ("In: GroundPlantButtonManager: Start");
+
+		harvestablePlant = gameObject.GetComponent<HarvestablePlant>();
+
+		//Benötigte Buttons holen
+		plantButton = GameObject.Find ("UI/HarvestButtons/PlantButton").GetComponent<Button>();
+		waterButton = GameObject.Find ("UI/HarvestButtons/WaterButton").GetComponent<Button>();
+		harvestButton = GameObject.Find ("UI/HarvestButtons/HarvestButton").GetComponent<Button>();
+		//fertiliseButton = GameObject.Find ("UI/HarvestButtons/fertiliseButton").GetComponent<Button>();
+
+
+		/*plantButton.gameObject.SetActive (false);
+		waterButton.gameObject.SetActive (false);
+		harvestButton.gameObject.SetActive (false);*/
+		//button_Time.gameObject.SetActive (false);
+
+	}
+
+	public void OnTriggerEnter(){
+		Debug.Log ("In: GroundPlantButtonManager: OnTriggerEnter");
+
+		oldState = harvestablePlant.currentState; //Zur Überpüfung für OnTriggerStay
+		ButtonsRemoveOldListeners (); //Alte Listeners der Buttons werden entfernt (sonst würden die wieder mitaufgerufen werden beim Klicken)
+
+
+		switch (harvestablePlant.currentState) {
+
+		case HarvestablePlant.HarvestStates.None: 
+			Debug.Log ("Case None");
+
+			ActivateButton (plantButton);
+			plantButton.onClick.AddListener (harvestablePlant.OnClickSuccessfull); //Beim Klicken wird die Methode OnClickSuccessfull in HarvestablePlant aufgerufen
+
+			break;
+		case HarvestablePlant.HarvestStates.Seed: 
+			Debug.Log ("Case Seed");
+			break;
+		case HarvestablePlant.HarvestStates.Seedling: 
+			Debug.Log ("Case Seedling");
+			break;
+		case HarvestablePlant.HarvestStates.HarvestablePlant: 
+			Debug.Log ("Case HarvestablePlant");
+			break;
+		case HarvestablePlant.HarvestStates.Plant: 
+			Debug.Log ("Case Plant");
+			break;
+
+		}
+	}
+
+	public void OnTriggerStay(){
+		Debug.Log ("In: GroundPlantButtonManager: OnTriggerStay");
+	}
+
+	public void OnTriggerExit(){
+		Debug.Log ("In: GroundPlantButtonManager: OnTriggerExit");
+	}
+
+	public void UpdateCurrentState(HarvestablePlant.HarvestStates newState){
+		Debug.Log ("In: GroundPlantButtonManager: UpdateCurrentState: " + newState);
+	}
+
+
+
+	public void ActivateButton(Button button){
+		StartCoroutine (ActivateButtonWithDelay (button));
+		Vector3 offset = new Vector3(transform.position.x, transform.position.y+1, transform.position.z);
+		Vector3 targetPosition = Camera.main.WorldToScreenPoint (offset);
+
+		button.transform.position = targetPosition;
+		button.onClick.AddListener (delegate{DeactivateButton(button);});
+
+	}
+
+
+	public void DeactivateButton(Button button){
+		button.gameObject.SetActive (false);
+	}
+
+	public void ButtonsRemoveOldListeners(){
+		plantButton.onClick.RemoveAllListeners();
+		waterButton.onClick.RemoveAllListeners ();
+		harvestButton.onClick.RemoveAllListeners ();
+	}
+
+	IEnumerator ActivateButtonWithDelay(Button button){
+		//Button wird nicht direkt, sondern mit einer Verzögerung von 1 Sek angezeigt
+		yield return new WaitForSeconds (1f);
+		button.gameObject.SetActive (true);
+	}
+
+
+
+
+
+
+	//ALT:
+	/*
 
 	//Verschiedene Interaktionsmöglichkeiten mit dem Beet:
 	private Button button_Plant;
@@ -38,7 +152,7 @@ public class Patch : Interactable {
 			vegetable.PlantSeedling();
 			Debug.Log(vegetable.name);
 
-		});*/
+		});*/ /*
 	}
 
 	public override void OnTriggerEnter(){
@@ -71,6 +185,9 @@ public class Patch : Interactable {
 			StartCoroutine(ActivateButtonWithDelay(button_Time));
 			icon = button_Time.GetComponent<Icon> (); 
 			icon.target = transform; //Target des Buttons wird auf dieses Beetstück gesetzt
+
+
+
 			StartCoroutine (WaitUntilFullyGrown (vegetable.timeToGrow)); //Es wird eine gewisse Zeit gewartet, bevor die Plfanze ausgewachsen ist
 			break;
 		case Vegetable.HarvestStates.FullyGrown: 
@@ -105,8 +222,15 @@ public class Patch : Interactable {
 		
 	public void ActivateButton(Button button){
 		StartCoroutine (ActivateButtonWithDelay (button));
-		icon = button.GetComponent<Icon> ();
-		icon.target = transform; //Target des Buttons wird auf dieses Beetstück gesetzt
+		//icon = button.GetComponent<Icon> ();
+		//icon.target = transform; //Target des Buttons wird auf dieses Beetstück gesetzt
+
+
+		Vector3 offset = new Vector3(transform.position.x, transform.position.y+1, transform.position.z);
+		Vector3 targetPosition = Camera.main.WorldToScreenPoint (offset);
+
+		button.transform.position = targetPosition;
+
 		button.onClick.AddListener (delegate{DeactivateButton(button);});
 
 	}
@@ -137,6 +261,6 @@ public class Patch : Interactable {
 		button.gameObject.SetActive (true);
 	}
 
-
+	*/
 
 }
