@@ -1,9 +1,8 @@
-﻿ using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI; //Wichtig!
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
 
@@ -22,21 +21,16 @@ public class PlayerController : MonoBehaviour {
 		//TOUCH:
 		//	Touch touch = Input.GetTouch(0);
 			
-		//PC
+			//PC
 		if (Input.GetMouseButtonDown (0)) {			
 			//Handle finger movements based on touch phase
-
-			//PC
-			if (!EventSystem.current.IsPointerOverGameObject()){
-
-			//TOUCH
-			//if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)){
+			if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject ()) {
 
 				//PC
-			MoveToTouch ();		
+				MoveToTouch ();		
 
 				//TOUCH
-			/*	switch (touch.phase) {
+				/*switch (touch.phase) {
 				case TouchPhase.Began:
 						MoveToTouch (); //Movement beim Tippen
 						break;
@@ -83,11 +77,10 @@ public class PlayerController : MonoBehaviour {
 
 				//PC
 				float step = 30f * Time.deltaTime;
-					
-					transform.position = Vector3.MoveTowards (transform.position, hit.point, step);
-					hit.point = new Vector3 (hit.point.x, this.transform.position.y, hit.point.z);
-					transform.LookAt (hit.point); 
 
+				transform.position = Vector3.MoveTowards (transform.position, hit.point, step);
+				hit.point = new Vector3 (hit.point.x, this.transform.position.y, hit.point.z);
+				transform.LookAt (hit.point); 
 			}
 		}
 	
