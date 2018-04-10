@@ -16,10 +16,6 @@ public class MainMenu : MonoBehaviour {
         {
             mainMenuUI.SetActive(false);
             settingsMenuUI.SetActive(true);
-        }else if (getMenuIndex() == 2)
-        {
-            mainMenuUI.SetActive(false);
-            settingsMenuUI.SetActive(false);
         }else
         {
             mainMenuUI.SetActive(true);

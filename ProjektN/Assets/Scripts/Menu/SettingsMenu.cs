@@ -66,9 +66,6 @@ public class SettingsMenu : MonoBehaviour {
     {
         if (MainMenu.getMenuIndex() == 1)
         {
-            MainMenu.setMenuIndex(2);
-            settingsMenuUI.SetActive(false);
-            mainMenuUI.SetActive(false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else
